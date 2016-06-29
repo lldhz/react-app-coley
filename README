@@ -1,0 +1,103 @@
+## 开发说明
+
+### 首先安装好各种依赖
+
+```
+$ npm install webpack -g
+$ npm install gulp -g
+$ npm install
+```
+
+### 运行webpack, 打包js
+
+```
+$ webpack -w
+```
+
+### 运行gulp, 打包css, 包含一个检测文件修改, 自动刷新浏览器的功能,
+
+```
+$ gulp
+```
+
+### 配置nginx, 前端静态文件目录, 反向代理等, 参考配置
+
+```
+server {
+    listen  3000;
+    server_name localhost;
+    root /Users/john/test/app;
+    location / {
+        add_header Cache-Control no-store;
+        index index.html;
+    }
+    location /ws {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://wx.15xiaoshi.com/ws;
+    }
+}
+```
+
+
+### 运行nginx, 访问http://localhost:3000
+
+> 修改js文件, 保存后webpack会自动编译, 修改css后, gulp会也会自动编译, 浏览器会自动刷新
+
+
+### 编译工具说明
+
+webpack, gulp 开发的时候要一直开着, 文件会输出在build目录下, package.json中可以定义版本,
+文件会输出到对应的目录, 也可以在webpack.config.js中修改, 修改这两个文件需要重启webpack gulp
+
+编译生成环境命令
+
+```
+$ webpack --config webpack.config.production.js --progress
+$ gulp package
+```
+
+
+代码说明:
+
+入口文件: index.js , 在此文件中定义路由
+
+公共组件: components/
+
+各种Store: store/
+
+min-router.js 是一个简单的路由, 这个文件不用改
+
+http.js 是一个简单的ajax api 接口, 在一定程度上可以代替jquery, 超mini, 不喜欢可以用其他的ajax 库
+
+Home.js , Mine.js, New.js, People.js, NotFound.js, TarBar.js 是一些参考页面
+只是展示页面跳转, Store的使用, ajax的使用
+
+index.html 不用说, 一看就知道了, 里面引入了一个weui样式库, 微信团队开发的
+
+可以使用一些现成的组件, 不喜欢可以咔嚓掉
+
+-----------------
+
+开发流程 ->
+
+```
+$ webpack -w
+$ gulp
+$ nginx
+$ open browser http://localhost:3000/
+$ coding....
+$ change change change..
+$ good luck
+```
+
+部署流程 ->
+
+```
+$ 修改package.json中的版本
+$ 打包js, css
+$ 修改index.html中的版本号, 避免缓存
+$ 上传代码到nginx下面
+$ 不用重启, 刷新浏览器即可
+```

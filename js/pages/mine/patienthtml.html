@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../../css/patient.less"/>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.2/weui.min.css"/>
+</head>
+<body>
+    <div class="weui_cell">
+        <span class="patient_title">基本信息</span>
+    </div>
+
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <label class="weui_label">性别</label>
+        </div>
+        <div class="weui_cell_bd">
+            <input type="button" class="weui_btn weui_btn_mini weui_btn_plain_primary" value="男"/>
+            <input type="button" class="weui_btn weui_btn_mini weui_btn_plain_default" value="女"/>
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <label class="weui_label">生日</label>
+        </div>
+        <div class="weui_cell_ft">
+            <input class="weui_input" type="date">
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <span class="weui_label">吸烟史</span>
+        </div>
+        <div class="weui_cell_bd">
+            <div class="patient_row">
+                <input type="button" class="weui_btn weui_btn_mini weui_btn_default" value="无"/>
+                <input type="button" class="weui_btn weui_btn_mini weui_btn_default" value="有"/>
+            </div>
+            <div class="patient_row">
+                <input type="button" class="weui_btn weui_btn_mini weui_btn_default" value="5年以下"/>
+                <input type="button" class="weui_btn weui_btn_mini weui_btn_default" value="5至10年"/>
+                <input type="button" class="weui_btn weui_btn_mini weui_btn_default" value="10年以上"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <label class="weui_label">重要伴随病史</label>
+        </div>
+        <div class="weui_cell_ft">
+            <input class="weui_input" type="text" placeholder="比如糖尿病,高血压等">
+        </div>
+    </div>
+
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <label class="weui_label">其他治疗药物</label>
+        </div>
+        <div class="weui_cell_ft">
+            <input class="weui_input" type="text" placeholder="除了肺癌药物,您服用了其他什么药物">
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd weui_cell_primary">
+            <label class="weui_label">过敏药物</label>
+        </div>
+        <div class="weui_cell_ft">
+            <input class="weui_input" type="text" placeholder="是否有过敏的药物">
+        </div>
+    </div>
+    <div class="weui_cell">
+        <input type="button" class="weui_btn weui_btn_primary" value="下一页"/>
+    </div>
+
+</body>
+</html>

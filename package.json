@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "16.06.29",
+  "version": "16.06.30",
   "description": "react app",
   "main": "index.js",
   "scripts": {

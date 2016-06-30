@@ -138,75 +138,106 @@ var TreatmentInfo = React.createClass({
     },
     setImages: function(localImages) {
         this.setState({localImages:localImages});
-        var Images =[];
-        localImages.map((img,i)=>{
-            wx.uploadImage({
-                localId:img,
-                isShowProgressTips:1,
-                success:(res)=>{
-                    Images.push(res.serverId);
-                }
-            });
-        });
-        CustomStore.setItem('Treatment',"images",Images.join(','));
+        //var localIds = localImages;
+        //console.log(localIds);
+        //var serverImages = [];
+        //function uploadImgs(localIds)
+        //{
+        //    var localId = localImages.pop();
+        //    console.log(localId);
+        //    wx.uploadImage({
+        //        localId: localId,
+        //        isShowProgressTips: 1,
+        //        success: function (res) {
+        //            //var serverImages = CustomStore.getItem('Treatment',"images");
+        //            serverImages.push(res.serverId); // 返回图片的服务器端ID
+        //            //CustomStore.setItem('Treatment',"images",serverImages);
+        //            console.log(serverImages);
+        //            //其他对serverId做处理的代码
+        //            if(localImages.length > 0){
+        //                uploadImgs(localImages);
+        //            }
+        //            else
+        //            {
+        //                CustomStore.setItem('Treatment',"images",serverImages.join(';'));
+        //            }
+        //        }
+        //    });
+        //};
+        //uploadImgs(localIds);
+        //CustomStore.setItem('Treatment',"images",Images.join(','));
     },
-    //setServerImage:function(serverImages)
-    //{
-    //    this.setState({serverImages:serverImages});
-    //},
+    setServerImage:function(localImages)
+    {
+        var images = [], i = 0, length = localImages.length;
+        function upload() {
+            wx.uploadImage({
+                localId: localImages[i],
+                isShowProgressTips: 1,
+                success: (res) => {
+                    i++;
+                    images.push(res.serverId);
+                    if (i < length) {
+                        upload();
+                    } else {
+                        CustomStore.setItem("Treatment", "images", images.join(';'));
+                        }
+                    }
+                });
+        }
+        upload();
+    },
 
     onSubmit :function()
     {
-
-            var requestBody={
-                openid:localStore.getItem('openid'),
-                uuid:CustomStore.getItem("Treatment","uuid"),
-                startdate:CustomStore.getItem("Treatment","startDate")==''
-                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","startDate"),
-                enddate:CustomStore.getItem("Treatment","endDate")==''
-                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","endDate"),
-                scheme:CustomStore.getItem("Treatment","scheme"),
-                schemeComment:CustomStore.getItem("Treatment","schemeComment"),
-                otherScheme:CustomStore.getItem("Treatment","otherScheme"),
-                effect:CustomStore.getItem("Treatment","effect"),
-                images:CustomStore.getItem("Treatment","images")
-            };
-            console.log(requestBody);
-            TreatmentApi.postTreatment({content:requestBody});
-            Alert("完成","您已经完成资料填写!");
-
+            var imagelist = this.refs.imagelist;
+            var images = [], i = 0, length = imagelist.state.images.length;
+            function upload() {
+                wx.uploadImage({
+                    localId: imagelist.state.images[i],
+                    isShowProgressTips: 1,
+                    success: (res) => {
+                        i++;
+                        images.push(res.serverId);
+                        if (i < length) {
+                            upload();
+                        } else {
+                            var requestBody={
+                                openid:localStore.getItem('openid'),
+                                uuid:CustomStore.getItem("Treatment","uuid"),
+                                startDate:CustomStore.getItem("Treatment","startDate")==''
+                                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","startDate"),
+                                endDate:CustomStore.getItem("Treatment","endDate")==''
+                                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","endDate"),
+                                scheme:CustomStore.getItem("Treatment","scheme"),
+                                schemeComment:CustomStore.getItem("Treatment","schemeComment"),
+                                otherScheme:CustomStore.getItem("Treatment","otherScheme"),
+                                effect:CustomStore.getItem("Treatment","effect"),
+                                images:images.join(';')
+                            };
+                            console.log(requestBody);
+                            TreatmentApi.postTreatment({content:requestBody});
+                            Alert("完成","您已经完成资料填写!");
+                        }
+                    }
+                });
+            }
+            upload();
     },
+
     onClear :function()
     {
         confirm('确认','您确定清除所有数据吗？', () => {
             CustomStore.clear("Treatment");
-            this.setState({localImages:[],serverImages:[]});
+            this.setState({data:undefined,localImages:[],serverImages:[]});
         });
     },
     onNew :function()
     {
         confirm('确认','您已经完成资料填写？', () =>{
-
-            CustomStore.setItem('Treatment',"images",this.state.serverImages.join(','));
-            var requestBody={
-                openid:localStore.getItem('openid'),
-                uuid:CustomStore.getItem("Treatment","uuid"),
-                startdate:CustomStore.getItem("Treatment","startDate")==''
-                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","startDate"),
-                enddate:CustomStore.getItem("Treatment","endDate")==''
-                    ?new Date().Format("yyyyMMdd"):CustomStore.getItem("Treatment","endDate"),
-                scheme:CustomStore.getItem("Treatment","scheme"),
-                schemeComment:CustomStore.getItem("Treatment","schemeComment"),
-                otherScheme:CustomStore.getItem("Treatment","otherScheme"),
-                effect:CustomStore.getItem("Treatment","effect"),
-                images:CustomStore.getItem("Treatment","images")
-            };
-            console.log(requestBody);
-            TreatmentApi.postTreatment({content:requestBody});
-            Alert("完成","您已经完成资料填写!",()=>{
-                CustomStore.clear("Treatment");
-                this.setState({localImages:[],serverImages:[]});
-            });
+            this.onSubmit();
+            CustomStore.clear("Treatment");
+            this.setState({data:undefined,localImages:[],serverImages:[]});
         });
 
     },
@@ -220,6 +251,7 @@ var TreatmentInfo = React.createClass({
         var endDate = this.state.data.endDate.toDate().Format("yyyy-MM-dd");
         var booleanFalse = false;
         var booleanTrue=true;
+        var images=[];
         return (
             <div>
                 <div className="weui_cell">
@@ -270,12 +302,12 @@ var TreatmentInfo = React.createClass({
                         <label className="weui_label">报告上传</label>
                     </div>
                     <div className="weui_cell_bd weui_cell_primary">
-                        <ImageList localImages={this.state.localImages}
-                                   canAdd={booleanTrue}
-                                   canRemove={booleanTrue}
-                                   canPreview={booleanFalse}
-                                   setImages={this.setImages}
-                                   />
+                        <ImageList ref="imagelist"
+                                images={images}
+                                canRemove={booleanTrue}
+                                canPreview={booleanFalse}
+                                canAdd={booleanTrue}
+                                    />
                     </div>
                 </div>
                 <div className="weui_cell">

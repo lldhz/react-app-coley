@@ -47,7 +47,7 @@ exports.fetchWeixinConfig = function(callback) {
 exports.fetchWeixinUserInfo = function(params,callback){
     if(!localStore.getItem("accessed") && params.length>0)
     {
-        http.sync_get("http://service2.haalthy.com/open/user/basic"+params,data => {
+        http.getJSON("http://service2.haalthy.com/open/user/basic"+params,data => {
             if(data.code == 10)
             {
                 localStore.setItem('openid',data.content.openid);

@@ -14,15 +14,15 @@ var ImageList = React.createClass({
      /*
     getInitialState:
     //*/
-    //getInitialState: function()
-    //{
-    //
-    //},
-
-    componentDidMount:function()
+    getInitialState: function()
     {
-        //util.fetchWeixinConfig();
+        return {images:this.props.images};
     },
+
+    //componentDidMount:function()
+    //{
+    //    //util.fetchWeixinConfig();
+    //},
 
     onSelectImage:function()
     {
@@ -31,7 +31,7 @@ var ImageList = React.createClass({
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: (res) => {
-                this.props.setImages(res.localIds);
+                this.setState({images:res.localIds});
             }
         });
     },
@@ -47,21 +47,21 @@ var ImageList = React.createClass({
     {
             confirm('确认','您确定要移除该照片吗？', () => {
                 //var _images = this.props.localImages;
-                this.props.localImages.splice(i, 1);
-                this.props.setImages(this.props.localImages);
+                this.state.images.splice(i, 1);
+                this.setState({images:this.state.images});
             });
     },
 
     onPreviewImage:function(i)
     {
             wx.previewImage({
-                current:this.props.localImages[i],
-                urls:this.props.localImages
+                current:this.state.images[i],
+                urls:this.state.images
             });
     },
     renderAddButton:function()
     {
-        if(this.props.canAdd && this.props.localImages.length <9) {
+        if(this.props.canAdd && this.state.images.length <9) {
             return (
                 <li>
                     <div className="upload-file">
@@ -79,7 +79,7 @@ var ImageList = React.createClass({
 
     renderImages:function()
     {
-        return this.props.localImages.map((image,i)=>{
+        return this.state.images.map((image,i)=>{
             //if(image!='')
                 return(
                     <li key={i}><img src={image} onClick={this.onClickImage.bind(null,i)}/></li>

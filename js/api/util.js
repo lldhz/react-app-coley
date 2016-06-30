@@ -45,7 +45,7 @@ exports.fetchWeixinConfig = function(callback) {
 };
 
 exports.fetchWeixinUserInfo = function(params,callback){
-    if(!localStore.getItem("accessed") && params.length>0)
+    if(localStore.getItem("accessed")!=true && params.length>0)
     {
         http.getJSON("http://service2.haalthy.com/open/user/basic"+params,data => {
             if(data.code == 10)
@@ -57,12 +57,10 @@ exports.fetchWeixinUserInfo = function(params,callback){
                 localStore.setItem('sex',data.content.sex);
                 localStore.setItem('headimgurl',data.content.headimgurl);
                 localStore.setItem('accessed',true);
-                callback && callback();
             }
         });
     }
-    else
-        callback && callback();
+    callback && callback();
 };
 
 exports.getRequest = function (data) {
@@ -70,7 +68,7 @@ exports.getRequest = function (data) {
     var theRequest = new Object();
     if (data.indexOf("?") != -1) {
         var str = data.substr(1);
-        strs = str.split("&");
+        var strs = str.split("&");
         for(var i = 0; i < strs.length; i ++) {
             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }

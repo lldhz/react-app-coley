@@ -35,7 +35,10 @@ var ImageList = React.createClass({
             }
         });
     },
-
+    clean:function()
+    {
+        this.setState({images:[]});
+    },
     onClickImage:function(i)
     {
         if(this.props.canRemove)

@@ -13,3 +13,14 @@ exports.postMechanism= function(requestBody,callback) {
         callback && callback(data);
     });
 };
+
+
+exports.getMechanism= function(requestBody,callback) {
+    http.getJSON("http://service2.haalthy.com/open/user/mechanism",requestBody,data=>{
+        if(data.code != 0)
+        {
+            CustomStore.setStore("Mechanism",data.content);
+        }
+        callback && callback(data);
+    });
+};

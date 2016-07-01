@@ -43,7 +43,7 @@ var TreatmentInfo = React.createClass({
     */
     componentWillMount: function()
     {
-        return null;
+        CustomStore.addListener("Treatment",this.onStoreChange);
     },
      /*
     componentDidMount:
@@ -216,28 +216,53 @@ var TreatmentInfo = React.createClass({
                                 images:images.join(';')
                             };
                             console.log(requestBody);
-                            TreatmentApi.postTreatment({content:requestBody});
-                            Alert("完成","您已经完成资料填写!");
+                            TreatmentApi.postTreatment({content:requestBody},Alert("完成","您已经完成资料填写!"));
                         }
                     }
                 });
             }
+        if(length == 0)
+        {
+            Alert("提示","请至少选择一份您的病历，检查报告上传。");
+        }
+        else
             upload();
     },
 
     onClear :function()
     {
         confirm('确认','您确定清除所有数据吗？', () => {
-            CustomStore.clear("Treatment");
-            this.setState({data:undefined,localImages:[],serverImages:[]});
+            var initData = {
+                uuid:'',
+                startDate:new Date().Format("yyyyMMdd"),
+                endDate:new Date().Format("yyyyMMdd"),
+                scheme:'',
+                schemeComment:'',
+                otherScheme:'',
+                effect:'',
+                images:''
+            };
+            CustomStore.setStore('Treatment',initData);
+            this.refs.imagelist.clean();
+            //this.setState({data:undefined,localImages:[],serverImages:[]});
         });
     },
     onNew :function()
     {
         confirm('确认','您已经完成资料填写？', () =>{
             this.onSubmit();
-            CustomStore.clear("Treatment");
-            this.setState({data:undefined,localImages:[],serverImages:[]});
+            var initData = {
+                uuid:'',
+                startDate:new Date().Format("yyyyMMdd"),
+                endDate:new Date().Format("yyyyMMdd"),
+                scheme:'',
+                schemeComment:'',
+                otherScheme:'',
+                effect:'',
+                images:''
+            };
+            CustomStore.setStore('Treatment',initData);
+            this.refs.imagelist.clean();
         });
 
     },
@@ -311,13 +336,15 @@ var TreatmentInfo = React.createClass({
                     </div>
                 </div>
                 <div className="weui_cell">
-                    <a href="javascript:void(0);" className="weui_btn custom_button" value="完成" onClick={this.onSubmit}>完成</a>
+                    <div className="patient_row">
+                        <a href="javascript:void(0);" className="weui_btn custom_button" value="完成" onClick={this.onSubmit}>完成</a>
+                    </div>
                 </div>
-                <div className="weui_cell">
-                    <a href="javascript:void(0);" className="weui_btn custom_button_left" value="清空" onClick={this.onClear}>清空</a>
-                    <a href="javascript:void(0);" className="weui_btn custom_button_right" value="新增" onClick={this.onNew}>新增</a>
+                <div className="patient_row">
+                    <div><a href="javascript:void(0);" className="weui_btn custom_button_left_mini" value="清空" onClick={this.onClear}>清空</a></div>
+                    <div><a href="javascript:void(0);" className="weui_btn custom_button_right_mini" value="新增" onClick={this.onNew}>新增</a></div>
                 </div>
-                </div>)
+            </div>)
     }
 });
 

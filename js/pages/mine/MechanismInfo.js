@@ -45,6 +45,10 @@ var MechanismInfo = React.createClass({
         //UserStore.addListener(this.onOpenidChange)
         //return null;
     },
+    componentDidMount:function()
+    {
+        MechanismApi.getMechanism({openid:localStore.getItem('openid')});
+    },
      /*
     componentDidUnMount:
     */

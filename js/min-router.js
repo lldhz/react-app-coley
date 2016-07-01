@@ -77,12 +77,8 @@ function jump() {
 }
 
 function start() {
-    util.fetchWeixinUserInfo(
-        window.location.search,()=>{
-            window.onhashchange = () => jump();
-            jump();
-        }
-    );
+    window.onhashchange = () => jump();
+    jump();
 }
 //var wx=require('./api/wx')
 exports.setRoutes = setRoutes;

@@ -31,9 +31,13 @@ function Mine(callback) {
     })
 }
 function PatientInfo(callback) {
-    require.ensure([], function () {
-        callback(require('./pages/mine/PatientInfo'), "患者信息");
-    })
+    util.fetchWeixinUserInfo(
+        window.location.search,()=>{
+            require.ensure([], function () {
+                callback(require('./pages/mine/PatientInfo'), "患者信息");
+            })
+        }
+    );
 }
 
 function MechanismInfo(callback) {

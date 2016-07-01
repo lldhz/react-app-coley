@@ -16,7 +16,7 @@ exports.postPatient= function(requestBody,callback) {
 
 exports.getPatient=function(param,callback)
 {
-    http.get("http://service2.haalthy.com/open/user/patient",param,data=>{
+    http.getJSON("http://service2.haalthy.com/open/user/patient",param,data=>{
         if(data.code != 0)
         {
             CustomStore.setStore("Patient",data.content);

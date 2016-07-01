@@ -4,10 +4,14 @@ html, body{
 }
 body{
   background-color: #f9f9f9;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 .container {
   width: 95%;
   height: 100%;
+//  padding-left: 3%
 }
 
 .content-box {padding-top: 44px; padding-bottom: 49px;}
@@ -60,6 +64,7 @@ body{
   margin-bottom: 3px;
   margin-top: 3px;
   padding-top: 5px;
+  display: inline-block;
 }
 
 .patient_cell{
@@ -168,5 +173,19 @@ body{
 .weui_cell_bd input{margin: 7px 10px 7px 10px;}
 .custom_button {width:100%;background-color:#3dd0dd;  }
 
-.custom_button_left {width:45%;background-color:#3dd0dd;float:left;margin-top: auto;display: inline-block;  }
-.custom_button_right {width:45%;background-color:#3dd0dd;float:right;margin-top: auto;display: inline-block;  }
+.custom_button_mini {
+  width:40%;
+  background-color:#3dd0dd;
+  position: relative;
+  top:0;
+  float:left;display: inline-block;margin-left: 5%;margin-top: 0;padding-top: 0;  }
+.custom_button_left_mini {
+  width:40%;
+  background-color:#3dd0dd;
+  float:left;display: inline-block;margin-left: 5%;margin-top: 0;
+  padding-top: 0;  }
+.custom_button_right_mini {
+  width:40%;
+  background-color:#3dd0dd;
+  float:left;display: inline-block;margin-left: 10%;margin-top: 0;
+  padding-top: 0;  }

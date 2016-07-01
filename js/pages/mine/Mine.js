@@ -3,17 +3,17 @@
  */
 'use strict'
 
-import React,{PropTypes,Component} from 'react'
+var React = require('react');
 import Content from '../../components/content'
 import FooterNav from '../../components/footer-nav'
 
-export default class Mine extends Component {
-
+var Mine = React.createClass({
+    getInitialState:function()
+    {},
      /*
     render:
     */    
-    render(
-    ){
+    render:function(){
         return (
             <div>
                 <Content>
@@ -21,6 +21,6 @@ export default class Mine extends Component {
                 <FooterNav actived="mine"/>
             </div>)
     }
-};
+});
 
 module.exports = Mine;

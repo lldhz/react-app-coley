@@ -1,7 +1,7 @@
 'use strict'
 
 var React = require('react');
-var Mechanism = React.createClass({
+var MechanismSearch = React.createClass({
     /*
      Mixins:
      */
@@ -24,14 +24,8 @@ var Mechanism = React.createClass({
      render:
      */
     render: function() {
-    	return (
-            <div>
-                <Content>
-                </Content>
-                <FooterNav actived="mechanism"/>
-            </div>
-        )
+    	return (null)
     }
 });
 
-module.exports = Mechanism;
+module.exports = MechanismSearch;

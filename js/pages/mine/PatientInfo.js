@@ -38,6 +38,9 @@ var PatientInfo = React.createClass({
         PatientApi.getPatient({openid:localStore.getItem("openid")});
     },
 
+    componentDidMount:function(){
+    },
+
     componentDidUnMount:function()
     {
         CustomStore.removerListener("Patient",this.onDataChange);
@@ -80,15 +83,15 @@ var PatientInfo = React.createClass({
     },
     onDataInputMedicalHistory:function(event)
     {
-        CustomStore.setItem("Patient","medicalHistory",evnet.target.value);
+        CustomStore.setItem("Patient","medicalHistory",event.target.value);
     },
     onDataInputOtherTherapy:function(event)
     {
-        CustomStore.setItem("Patient","otherTherapy",evnet.target.value);
+        CustomStore.setItem("Patient","otherTherapy",event.target.value);
     },
     onDataInputAllergies:function(event)
     {
-        CustomStore.setItem("Patient","allergies",evnet.target.value);
+        CustomStore.setItem("Patient","allergies",event.target.value);
     },
 
     onSubmit:function()
@@ -99,12 +102,12 @@ var PatientInfo = React.createClass({
         var requestBody =
         {
             openid:localStore.getItem('openid'),
-            sexy:CustomStore.getItem("Patient","sexy"),
+            sex:CustomStore.getItem("Patient","sex"),
             smokingHistory:CustomStore.getItem("Patient","smokingHistory"),
             birthday:CustomStore.getItem("Patient","birthday") ==''?new Date().Format('yyyyMMdd'):CustomStore.getItem("Patient","birthday"),
             medicalHistory:CustomStore.getItem("Patient","medicalHistory"),
             otherTherapy:CustomStore.getItem("Patient","otherTherapy"),
-            allergies:CustomStore.getItem("Patient","allergies"),
+            allergies:CustomStore.getItem("Patient","allergies")
         };
         PatientApi.postPatient({content:requestBody});
     },
@@ -145,7 +148,6 @@ var PatientInfo = React.createClass({
                              onClick={this.onSexButtonChecked}>女</div>
                     </div>
                 </div>
-
                 <div className="weui_cell">
                     <div className="weui_cell_hd">
                         <label className="weui_label">生日</label>

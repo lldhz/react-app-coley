@@ -19,34 +19,44 @@ var Mine = React.createClass({
             openid: localStore.getItem('openid'),
             functions:
                 [{
+                    title:'我的消息',
+                    link:'#',
+                    icon:'iconfont icon-message'
+                },
+                    {
                     title:'患者信息',
-                    link:'#/patientInfo',
+                    link:'#/patientInfoView',
                     icon:'iconfont icon-nan'
                 },
                     {
                         title:'病理信息',
-                        link:'#/mechanismInfo',
+                        link:'#/mechanismInfoView',
+                        icon:'iconfont icon-zhenliaojilu'
+                    },
+                    {
+                        title:'指标分析',
+                        link:'#/myroadView',
                         icon:'iconfont icon-zhenliaojilu'
                     }
                 ]
         }
     },
-    onClickItem:function(i){
-        console.log(i);
-        var func = this.state.functions[i];
-        console.log(func);
-        window.location.href = func.link;
-    },
     renderFunctionList:function(){
         var List=this.state.functions.map((func,i)=>{
             return (
-                <li key={i} onClick={this.onClickItem.bind(null,i)}>
-                    <i className={func.icon}></i><span>{func.title}</span><i className='iconfont icon-right'>&#xe613;</i>
+                <li>
+                    <a className="weui_cell" href={func.link} key={i}>
+                        <div className="weui_cell_bd weui_cell_primary">
+                            <i className={func.icon}></i><span>{"   "+func.title}</span>
+                        </div>
+                        <div className='weui_cell_ft'>
+                        </div>
+                    </a>
                 </li>
             );
         });
         return (
-            <ul className='mine-functions mine-font-middle'>
+            <ul className="weui_cells weui_cells_access">
                 {List}
             </ul>
         );

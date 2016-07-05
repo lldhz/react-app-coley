@@ -244,7 +244,7 @@ var MechanismInfo = React.createClass({
             detection:CustomStore.getItem("Mechanism","detection")
         };
         MechanismApi.postMechanism({content:requestBody},()=>{
-            window.location.href = "/#/treatmentInfo";
+            window.location.href = "/#/mechanismInfoView";
         });
     },
 
@@ -328,7 +328,7 @@ var MechanismInfo = React.createClass({
                 </div>
 
             <div className="weui_cell">
-                <a href="javascript:void(0);" className="weui_btn custom_button" value="下一页" onClick={this.onSubmit}>下一页</a>
+                <a href="javascript:void(0);" className="weui_btn custom_button" value="完成" onClick={this.onSubmit}>完成</a>
             </div>
         </div>
         )

@@ -111,7 +111,7 @@ var PatientInfo = React.createClass({
             allergies:CustomStore.getItem("Patient","allergies")
         };
         PatientApi.postPatient({content:requestBody},()=>{
-            window.location.href = "/#/mechanismInfo";
+            window.location.href = "/#/patientInfoView";
         });
     },
     onSmokedClick:function(event)
@@ -202,7 +202,7 @@ var PatientInfo = React.createClass({
                 </div>
 
                 <div className="weui_cell">
-                    <a href="javascript:void(0);" className="weui_btn custom_button" value="下一页" onClick={this.onSubmit}>下一页</a>
+                    <a href="javascript:void(0);" className="weui_btn custom_button" value="完成" onClick={this.onSubmit}>完成</a>
                 </div>
             </div>
         )

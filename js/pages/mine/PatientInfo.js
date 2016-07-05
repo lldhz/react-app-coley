@@ -48,6 +48,7 @@ var PatientInfo = React.createClass({
 
     onDataChange:function()
     {
+        console.log(CustomStore.getStore("Patient"));
         this.setState({data:CustomStore.getStore("Patient")});
     },
 
@@ -109,7 +110,9 @@ var PatientInfo = React.createClass({
             otherTherapy:CustomStore.getItem("Patient","otherTherapy"),
             allergies:CustomStore.getItem("Patient","allergies")
         };
-        PatientApi.postPatient({content:requestBody});
+        PatientApi.postPatient({content:requestBody},()=>{
+            window.location.href = "/#/mechanismInfo";
+        });
     },
     onSmokedClick:function(event)
     {
@@ -199,7 +202,7 @@ var PatientInfo = React.createClass({
                 </div>
 
                 <div className="weui_cell">
-                    <a href="/#/mechanismInfo" className="weui_btn custom_button" value="下一页" onClick={this.onSubmit}>下一页</a>
+                    <a href="javascript:void(0);" className="weui_btn custom_button" value="下一页" onClick={this.onSubmit}>下一页</a>
                 </div>
             </div>
         )

@@ -3,10 +3,10 @@
  */
 'use strict'
 
-import React,{PropTypes,Component} from 'react'
-import wx from '../api/wx'
-import util from '../api/util'
-require('./index')
+import React,{PropTypes,Component} from 'react';
+import wx from '../api/wx';
+import util from '../api/util';
+require('./index');
 var ImageList = React.createClass({
      /*
     Mixins:

@@ -68,7 +68,7 @@ MinRouter.setRoutes({
     "service": Service,
     "mechanism": Mechanism,
     "myroad": Myroad,
-    "patientinfo":PatientInfo,
+    "patientInfo":PatientInfo,
     "mechanismInfo":MechanismInfo,
     "treatmentInfo":TreatmentInfo,
     "":PatientInfo,

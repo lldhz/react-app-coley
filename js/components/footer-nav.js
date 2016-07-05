@@ -14,8 +14,8 @@ const navbuttonData =
                 name: "myroad",
                 text: "奇迹之旅",
                 link: "#/myroad",
-                actived: "iconfont icon-yhxxh",
-                noactived:"iconfont icon-yhxx2"
+                actived: "iconfont icon-yhxxh icon-size",
+                noactived:"iconfont icon-yhxx2 icon-size"
             }
         },
         {
@@ -23,8 +23,8 @@ const navbuttonData =
                 name: "mechanism",
                 text: "查一查",
                 link: "#/mechanism",
-                actived: "iconfont icon-cych",
-                noactived:"iconfont icon-cyc"
+                actived: "iconfont icon-cych icon-size",
+                noactived:"iconfont icon-cyc icon-size"
             }
         },
         {
@@ -32,8 +32,8 @@ const navbuttonData =
                 name: "service",
                 text: "自助服务",
                 link: "#/service",
-                actived: "iconfont icon-dsfkfh",
-                noactived:"iconfont icon-dsfkf"
+                actived: "iconfont icon-dsfkfh icon-size",
+                noactived:"iconfont icon-dsfkf icon-size"
             }
         },
         {
@@ -41,8 +41,8 @@ const navbuttonData =
                 name: "mine",
                 text: "我的",
                 link: "#/mine",
-                actived: "iconfont icon-wdh",
-                noactived:"iconfont icon-wd"}
+                actived: "iconfont icon-wdh icon-size",
+                noactived:"iconfont icon-wd icon-size"}
         }]
 };
 

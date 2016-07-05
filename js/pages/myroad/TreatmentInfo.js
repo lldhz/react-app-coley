@@ -138,34 +138,6 @@ var TreatmentInfo = React.createClass({
     },
     setImages: function(localImages) {
         this.setState({localImages:localImages});
-        //var localIds = localImages;
-        //console.log(localIds);
-        //var serverImages = [];
-        //function uploadImgs(localIds)
-        //{
-        //    var localId = localImages.pop();
-        //    console.log(localId);
-        //    wx.uploadImage({
-        //        localId: localId,
-        //        isShowProgressTips: 1,
-        //        success: function (res) {
-        //            //var serverImages = CustomStore.getItem('Treatment',"images");
-        //            serverImages.push(res.serverId); // 返回图片的服务器端ID
-        //            //CustomStore.setItem('Treatment',"images",serverImages);
-        //            console.log(serverImages);
-        //            //其他对serverId做处理的代码
-        //            if(localImages.length > 0){
-        //                uploadImgs(localImages);
-        //            }
-        //            else
-        //            {
-        //                CustomStore.setItem('Treatment',"images",serverImages.join(';'));
-        //            }
-        //        }
-        //    });
-        //};
-        //uploadImgs(localIds);
-        //CustomStore.setItem('Treatment',"images",Images.join(','));
     },
     setServerImage:function(localImages)
     {

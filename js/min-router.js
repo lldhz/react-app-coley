@@ -38,7 +38,7 @@ function Router(view) {
         document.title = title;
         var iframe = document.createElement('iframe');
         iframe.style.display = 'none';
-        iframe.src = 'images/favicon.ico';
+        iframe.src = 'build/images/favicon.ico';
         iframe.onload = () => {setTimeout(() => {iframe.remove()},0);};
         document.body.appendChild(iframe);
         ReactDom.render(<Page query={query}/>, document.getElementById('container'));

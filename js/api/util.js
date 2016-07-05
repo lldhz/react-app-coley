@@ -46,19 +46,22 @@ exports.fetchWeixinConfig = function(callback) {
 
 exports.fetchWeixinUserInfo = function(params,callback){
         //Alert('错误',params);
-        http.getJSON("http://service2.haalthy.com/open/user/basic"+params,data => {
-            if(data.code == 10)
-            {
-                localStore.setItem('openid',data.content.openid);
-                localStore.setItem('country',data.content.country);
-                localStore.setItem('nickname',data.content.nickname);
-                localStore.setItem('city',data.content.city);
-                localStore.setItem('sex',data.content.sex);
-                localStore.setItem('headimgurl',data.content.headimgurl);
-
+    if(!localStore.getItem('fetched')) {
+        http.getJSON("http://service2.haalthy.com/open/user/basic" + params, data => {
+            if (data.code == 10) {
+                localStore.setItem('openid', data.content.openid);
+                localStore.setItem('country', data.content.country);
+                localStore.setItem('nickname', data.content.nickname);
+                localStore.setItem('city', data.content.city);
+                localStore.setItem('sex', data.content.sex);
+                localStore.setItem('headimgurl', data.content.headimgurl);
+                localStore.setItem('fetched', true);
                 callback && callback();
             }
         });
+    }
+    else
+        callback && callback();
 };
 
 exports.getRequest = function (data) {

@@ -29,7 +29,7 @@ var Userinfo = React.createClass({
                 <div className='mine-userinfo-row mine-font-bigger'>
                     <span>{this.state.nickname}</span>
                 </div>
-                <div className='mine-userinfo-row mine-font-bigger'>
+                <div className='mine-userinfo-row mine-font-middle'>
                     <span><i className="iconfont">&#xe614;</i>{" "+this.state.country+" "+this.state.city}</span>
                 </div>
             </div>

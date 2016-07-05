@@ -8,9 +8,12 @@ var util = require('./api/util');
 import React from 'react';
 
 function Myroad(callback) {
-    require.ensure([], function(){
-        callback(require('./pages/myroad/MyRoad'),"奇迹之路");
-    })
+    util.fetchWeixinUserInfo(
+        window.location.search,()=>{
+            require.ensure([], function(){
+                callback(require('./pages/myroad/MyRoad'),"奇迹之路");
+            });
+        });
 }
 
 function Mechanism(callback) {
@@ -31,18 +34,22 @@ function Mine(callback) {
     })
 }
 function PatientInfo(callback) {
-    util.fetchWeixinUserInfo(
-        window.location.search,()=>{
-            require.ensure([], function () {
-                callback(require('./pages/mine/PatientInfo'), "患者信息");
-            })
-        }
-    );
+    require.ensure([], function () {
+        callback(require('./pages/mine/PatientInfo'), "患者信息");});
+}
+function PatientInfoView(callback) {
+    require.ensure([], function () {
+        callback(require('./pages/mine/PatientInfoView'), "患者信息");});
 }
 
 function MechanismInfo(callback) {
     require.ensure([], function(){
-        callback(require('./pages/mine/MechanismInfo'),"病情信息");
+        callback(require('./pages/mine/MechanismInfo'),"病理信息");
+    })
+}
+function MechanismInfoView(callback) {
+    require.ensure([], function(){
+        callback(require('./pages/mine/MechanismInfoView'),"病理信息");
     })
 }
 function TreatmentInfo(callback) {
@@ -70,8 +77,10 @@ MinRouter.setRoutes({
     "myroad": Myroad,
     "patientInfo":PatientInfo,
     "mechanismInfo":MechanismInfo,
+    "mechanismInfoView":MechanismInfoView,
     "treatmentInfo":TreatmentInfo,
-    "":PatientInfo,
+    "patientInfoView":PatientInfoView,
+    "":Myroad,
 
     "404": NotFound,
     ":a": NotFound,

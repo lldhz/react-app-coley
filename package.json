@@ -14,6 +14,7 @@
   "author": "ken@haalthy.com",
   "license": "MIT",
   "dependencies": {
+    "d3": "^4.1.0",
     "events": "^1.1.0",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",

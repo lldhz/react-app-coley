@@ -4,7 +4,9 @@
 'use strict'
 
 var React = require('react');
-require('../../api/Chart.min');
+var ReactD3 = require('react-d3-components');
+var d3 = require('d3');
+var LineChart = ReactD3.LineChart;
 
 var TreatmentTargetBar = React.createClass({
      /*
@@ -15,7 +17,106 @@ var TreatmentTargetBar = React.createClass({
     */
     getInitialState: function()
     {
-        return {data:this.props.target};
+        //var _data = this.props.target.data;
+        var _data = [
+            {
+                data: {
+                    label: 'CEA',
+                    values: [
+                        {x: new Date(2015, 2, 5), y: 1},
+                        {x: new Date(2015, 2, 6), y: 2},
+                        {x: new Date(2015, 2, 7), y: 0},
+                        {x: new Date(2015, 2, 8), y: 3},
+                        {x: new Date(2015, 2, 9), y: 2},
+                        {x: new Date(2015, 2, 10), y: 3},
+                        {x: new Date(2015, 2, 11), y: 4},
+                        {x: new Date(2015, 2, 12), y: 4},
+                        {x: new Date(2015, 2, 13), y: 1},
+                        {x: new Date(2015, 2, 14), y: 5},
+                        {x: new Date(2015, 2, 15), y: 0},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 18), y: 4},
+                        {x: new Date(2015, 2, 19), y: 4},
+                        {x: new Date(2015, 2, 20), y: 5},
+                        {x: new Date(2015, 2, 21), y: 5},
+                        {x: new Date(2015, 2, 22), y: 5},
+                        {x: new Date(2015, 2, 23), y: 1},
+                        {x: new Date(2015, 2, 24), y: 0},
+                        {x: new Date(2015, 2, 25), y: 1},
+                        {x: new Date(2015, 2, 26), y: 1}
+                    ]
+                },
+                xMinDate:new Date(2015, 2, 5),
+                xMaxDate:new Date(2015, 2,26)
+            },
+            {
+                data: {
+                    label: 'CY211',
+                    values: [
+                        {x: new Date(2015, 2, 5), y: 1},
+                        {x: new Date(2015, 2, 6), y: 2},
+                        {x: new Date(2015, 2, 7), y: 0},
+                        {x: new Date(2015, 2, 8), y: 3},
+                        {x: new Date(2015, 2, 9), y: 2},
+                        {x: new Date(2015, 2, 10), y: 3},
+                        {x: new Date(2015, 2, 11), y: 4},
+                        {x: new Date(2015, 2, 12), y: 4},
+                        {x: new Date(2015, 2, 13), y: 1},
+                        {x: new Date(2015, 2, 14), y: 5},
+                        {x: new Date(2015, 2, 15), y: 0},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 18), y: 4},
+                        {x: new Date(2015, 2, 19), y: 4},
+                        {x: new Date(2015, 2, 20), y: 5},
+                        {x: new Date(2015, 2, 21), y: 5},
+                        {x: new Date(2015, 2, 22), y: 5},
+                        {x: new Date(2015, 2, 23), y: 1},
+                        {x: new Date(2015, 2, 24), y: 0},
+                        {x: new Date(2015, 2, 25), y: 1},
+                        {x: new Date(2015, 2, 26), y: 1}
+                    ]
+                },
+                xMinDate:new Date(2015, 2, 5),
+                xMaxDate:new Date(2015, 2,26)
+            },
+            {
+                data: {
+                    label: 'CA153',
+                    values: [
+                        {x: new Date(2015, 2, 5), y: 1},
+                        {x: new Date(2015, 2, 6), y: 2},
+                        {x: new Date(2015, 2, 7), y: 0},
+                        {x: new Date(2015, 2, 8), y: 3},
+                        {x: new Date(2015, 2, 9), y: 2},
+                        {x: new Date(2015, 2, 10), y: 3},
+                        {x: new Date(2015, 2, 11), y: 4},
+                        {x: new Date(2015, 2, 12), y: 4},
+                        {x: new Date(2015, 2, 13), y: 1},
+                        {x: new Date(2015, 2, 14), y: 5},
+                        {x: new Date(2015, 2, 15), y: 0},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 16), y: 1},
+                        {x: new Date(2015, 2, 18), y: 4},
+                        {x: new Date(2015, 2, 19), y: 4},
+                        {x: new Date(2015, 2, 20), y: 5},
+                        {x: new Date(2015, 2, 21), y: 5},
+                        {x: new Date(2015, 2, 22), y: 5},
+                        {x: new Date(2015, 2, 23), y: 1},
+                        {x: new Date(2015, 2, 24), y: 0},
+                        {x: new Date(2015, 2, 25), y: 1},
+                        {x: new Date(2015, 2, 26), y: 1}
+                    ]
+                },
+                xMinDate:new Date(2015, 2, 5),
+                xMaxDate:new Date(2015, 2,26)
+            }
+        ];
+        var expandedItem=0;
+        return ({
+            data: _data,expanded:expandedItem
+        })
     },
      /*
     getDefaultProps:
@@ -36,110 +137,7 @@ var TreatmentTargetBar = React.createClass({
     */
     componentDidMount: function()
     {
-        var data = {
-            labels : ["January","February","March","April","May","June","July"],
-            datasets : [
-                {
-                    fillColor : "rgba(220,220,220,0.5)",
-                    strokeColor : "rgba(220,220,220,1)",
-                    pointColor : "rgba(220,220,220,1)",
-                    pointStrokeColor : "#fff",
-                    data : [65,59,90,81,56,55,40]
-                },
-                {
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#fff",
-                    data : [28,48,40,19,96,27,100]
-                }
-            ]
-        };
-        var options = {
 
-            //Boolean - If we show the scale above the chart data
-            scaleOverlay : false,
-
-            //Boolean - If we want to override with a hard coded scale
-            scaleOverride : false,
-
-            //** Required if scaleOverride is true **
-            //Number - The number of steps in a hard coded scale
-            scaleSteps : null,
-            //Number - The value jump in the hard coded scale
-            scaleStepWidth : null,
-            //Number - The scale starting value
-            scaleStartValue : null,
-
-            //String - Colour of the scale line
-            scaleLineColor : "rgba(0,0,0,.1)",
-
-            //Number - Pixel width of the scale line
-            scaleLineWidth : 1,
-
-            //Boolean - Whether to show labels on the scale
-            scaleShowLabels : false,
-
-            //Interpolated JS string - can access value
-            scaleLabel : "<%=value%>",
-
-            //String - Scale label font declaration for the scale label
-            scaleFontFamily : "'Arial'",
-
-            //Number - Scale label font size in pixels
-            scaleFontSize : 12,
-
-            //String - Scale label font weight style
-            scaleFontStyle : "normal",
-
-            //String - Scale label font colour
-            scaleFontColor : "#666",
-
-            ///Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines : true,
-
-            //String - Colour of the grid lines
-            scaleGridLineColor : "rgba(0,0,0,.05)",
-
-            //Number - Width of the grid lines
-            scaleGridLineWidth : 1,
-
-            //Boolean - Whether the line is curved between points
-            bezierCurve : true,
-
-            //Boolean - Whether to show a dot for each point
-            pointDot : true,
-
-            //Number - Radius of each point dot in pixels
-            pointDotRadius : 3,
-
-            //Number - Pixel width of point dot stroke
-            pointDotStrokeWidth : 1,
-
-            //Boolean - Whether to show a stroke for datasets
-            datasetStroke : true,
-
-            //Number - Pixel width of dataset stroke
-            datasetStrokeWidth : 2,
-
-            //Boolean - Whether to fill the dataset with a colour
-            datasetFill : true,
-
-            //Boolean - Whether to animate the chart
-            animation : true,
-
-            //Number - Number of animation steps
-            animationSteps : 60,
-
-            //String - Animation easing effect
-            animationEasing : "easeOutQuart",
-
-            //Function - Fires when the animation is complete
-            onAnimationComplete : null
-
-        };
-        var ctx=(this.refs.lineChartEx.getDOMNode()).getContext("2d");
-        var myLineChart = new Chart(ctx).Line(data, options);
     },
      /*
     componentWillUnmount:
@@ -148,23 +146,36 @@ var TreatmentTargetBar = React.createClass({
     {
         return null;
     },
+    onClick:function(i)
+    {
+        this.setState({expanded:i});
+
+    },
     renderItem:function(item,i){
-        if(item.expanded)
+        if(this.state.expanded === i)
         {
+            var xScale = d3.scaleTime().domain([item.xMinDate, item.xMaxDate]).range([0, screen.width * 0.8]);
             return (
-                <div key={i}>
-                    <canvas ref="lineChartEx" className="mine-LineChart-expanded"></canvas>
-                </div>
+                <li className="ui-border-t" key={i}>
+                    <h4>{item.data.label}</h4>
+                    <LineChart
+                        data={item.data}
+                        width={screen.width*0.8}
+                        height={220}
+                        margin={{top: 20, bottom: 50, left: screen.width*0.1, right: screen.width*0.1}}
+                        xScale={xScale}
+                        xAxis={{tickValues: xScale.ticks(d3.timeDay, (item.xMaxDate-item.xMinDate)/5), tickFormat: d3.timeParse("%m-%d")}}
+                        tooltipHtml={this.tooltipLine}
+                        />
+                </li>
             );
         }
         else
         {
             return (
-                <div key={i}>
-                    <div key={i}>
-                        <canvas ref="lineChart" className="mine-LineChart-mini"></canvas>
-                    </div>
-                </div>
+                <li className="ui-border-t" key={i} onClick={this.onClick.bind(null,i)}>
+                    <h4>{item.data.label}</h4>
+                </li>
             );
         }
     },
@@ -173,13 +184,21 @@ var TreatmentTargetBar = React.createClass({
             return this.renderItem(item,i);
         })
     },
+    tooltipLine:function(label, data) {
+        return label + "  : " + data.y;
+    },
      /*
     render:
     */
     render: function() {
+        var itemlist = this.renderItemList();
         return (
             <div>
-                <canvas id="lineChartEx" ref="lineChartEx" width='400px' height='400px'></canvas>
+                <section className="ui-panel ui-panel-pure ui-border-t">
+                    <ul class="ui-list ui-list-pure ui-border-tb">
+                        {itemlist}
+                    </ul>
+                </section>
             </div>)
     }
 });

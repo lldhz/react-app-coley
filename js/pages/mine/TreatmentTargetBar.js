@@ -4,9 +4,12 @@
 'use strict'
 
 var React = require('react');
-var ReactD3 = require('react-d3-components');
-var d3 = require('d3');
-var LineChart = ReactD3.LineChart;
+var ReactDom = require('react-dom');
+//var ReactD3 = require('react-d3-components');
+//var d3 = require('d3');
+//var LineChart = require('react-chartjs').Line;
+var Chart = require('chart.js');
+//var LineChart = ReactD3.LineChart;
 
 var TreatmentTargetBar = React.createClass({
      /*
@@ -18,104 +21,9 @@ var TreatmentTargetBar = React.createClass({
     getInitialState: function()
     {
         //var _data = this.props.target.data;
-        var _data = [
-            {
-                data: {
-                    label: 'CEA',
-                    values: [
-                        {x: new Date(2015, 2, 5), y: 1},
-                        {x: new Date(2015, 2, 6), y: 2},
-                        {x: new Date(2015, 2, 7), y: 0},
-                        {x: new Date(2015, 2, 8), y: 3},
-                        {x: new Date(2015, 2, 9), y: 2},
-                        {x: new Date(2015, 2, 10), y: 3},
-                        {x: new Date(2015, 2, 11), y: 4},
-                        {x: new Date(2015, 2, 12), y: 4},
-                        {x: new Date(2015, 2, 13), y: 1},
-                        {x: new Date(2015, 2, 14), y: 5},
-                        {x: new Date(2015, 2, 15), y: 0},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 18), y: 4},
-                        {x: new Date(2015, 2, 19), y: 4},
-                        {x: new Date(2015, 2, 20), y: 5},
-                        {x: new Date(2015, 2, 21), y: 5},
-                        {x: new Date(2015, 2, 22), y: 5},
-                        {x: new Date(2015, 2, 23), y: 1},
-                        {x: new Date(2015, 2, 24), y: 0},
-                        {x: new Date(2015, 2, 25), y: 1},
-                        {x: new Date(2015, 2, 26), y: 1}
-                    ]
-                },
-                xMinDate:new Date(2015, 2, 5),
-                xMaxDate:new Date(2015, 2,26)
-            },
-            {
-                data: {
-                    label: 'CY211',
-                    values: [
-                        {x: new Date(2015, 2, 5), y: 1},
-                        {x: new Date(2015, 2, 6), y: 2},
-                        {x: new Date(2015, 2, 7), y: 0},
-                        {x: new Date(2015, 2, 8), y: 3},
-                        {x: new Date(2015, 2, 9), y: 2},
-                        {x: new Date(2015, 2, 10), y: 3},
-                        {x: new Date(2015, 2, 11), y: 4},
-                        {x: new Date(2015, 2, 12), y: 4},
-                        {x: new Date(2015, 2, 13), y: 1},
-                        {x: new Date(2015, 2, 14), y: 5},
-                        {x: new Date(2015, 2, 15), y: 0},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 18), y: 4},
-                        {x: new Date(2015, 2, 19), y: 4},
-                        {x: new Date(2015, 2, 20), y: 5},
-                        {x: new Date(2015, 2, 21), y: 5},
-                        {x: new Date(2015, 2, 22), y: 5},
-                        {x: new Date(2015, 2, 23), y: 1},
-                        {x: new Date(2015, 2, 24), y: 0},
-                        {x: new Date(2015, 2, 25), y: 1},
-                        {x: new Date(2015, 2, 26), y: 1}
-                    ]
-                },
-                xMinDate:new Date(2015, 2, 5),
-                xMaxDate:new Date(2015, 2,26)
-            },
-            {
-                data: {
-                    label: 'CA153',
-                    values: [
-                        {x: new Date(2015, 2, 5), y: 1},
-                        {x: new Date(2015, 2, 6), y: 2},
-                        {x: new Date(2015, 2, 7), y: 0},
-                        {x: new Date(2015, 2, 8), y: 3},
-                        {x: new Date(2015, 2, 9), y: 2},
-                        {x: new Date(2015, 2, 10), y: 3},
-                        {x: new Date(2015, 2, 11), y: 4},
-                        {x: new Date(2015, 2, 12), y: 4},
-                        {x: new Date(2015, 2, 13), y: 1},
-                        {x: new Date(2015, 2, 14), y: 5},
-                        {x: new Date(2015, 2, 15), y: 0},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 16), y: 1},
-                        {x: new Date(2015, 2, 18), y: 4},
-                        {x: new Date(2015, 2, 19), y: 4},
-                        {x: new Date(2015, 2, 20), y: 5},
-                        {x: new Date(2015, 2, 21), y: 5},
-                        {x: new Date(2015, 2, 22), y: 5},
-                        {x: new Date(2015, 2, 23), y: 1},
-                        {x: new Date(2015, 2, 24), y: 0},
-                        {x: new Date(2015, 2, 25), y: 1},
-                        {x: new Date(2015, 2, 26), y: 1}
-                    ]
-                },
-                xMinDate:new Date(2015, 2, 5),
-                xMaxDate:new Date(2015, 2,26)
-            }
-        ];
         var expandedItem=0;
         return ({
-            data: _data,expanded:expandedItem
+           expanded:expandedItem,LineChart:{}
         })
     },
      /*
@@ -137,61 +45,66 @@ var TreatmentTargetBar = React.createClass({
     */
     componentDidMount: function()
     {
-
+        this.setState({LineChart:this.renderLineChart(this.state.expanded)});
+    },
+    renderLineChart:function(i)
+    {
+        this.props.data.map((item,i)=>{
+            var el=ReactDom.findDOMNode(this.refs["canvas"+i]);
+            console.log(el);
+            var ctx= el.getContext('2d');
+            console.log(ctx);
+            //var _data = item.data;
+            //console.log(_data);
+            return new Chart(ctx, item.data);
+        });
     },
      /*
     componentWillUnmount:
     */
     componentWillUnMount: function()
     {
+        //this.state.LineChart.destroy();
         return null;
     },
     onClick:function(i)
     {
+        //this.state.LineChart.destroy();
         this.setState({expanded:i});
+        //<LineChart
+        //    data={item.data}
+        //    width={screen.width*0.8}
+        //    height={220}
+        //    margin={{top: 20, bottom: 50, left: screen.width*0.1, right: screen.width*0.1}}
+        //    xScale={xScale}
+        //    xAxis={{tickValues: xScale.ticks(d3.timeDay, (item.xMaxDate-item.xMinDate)/5), tickFormat: d3.timeParse("%m-%d")}}
+        //    tooltipHtml={this.tooltipLine}
+        //    />
 
     },
     renderItem:function(item,i){
-        if(this.state.expanded === i)
-        {
-            var xScale = d3.scaleTime().domain([item.xMinDate, item.xMaxDate]).range([0, screen.width * 0.8]);
-            return (
-                <li className="ui-border-t" key={i}>
-                    <h4>{item.data.label}</h4>
-                    <LineChart
-                        data={item.data}
-                        width={screen.width*0.8}
-                        height={220}
-                        margin={{top: 20, bottom: 50, left: screen.width*0.1, right: screen.width*0.1}}
-                        xScale={xScale}
-                        xAxis={{tickValues: xScale.ticks(d3.timeDay, (item.xMaxDate-item.xMinDate)/5), tickFormat: d3.timeParse("%m-%d")}}
-                        tooltipHtml={this.tooltipLine}
-                        />
-                </li>
-            );
-        }
-        else
-        {
+
+            //var xScale = d3.scaleTime().domain([item.xMinDate, item.xMaxDate]).range([0, screen.width * 0.8]);
             return (
                 <li className="ui-border-t" key={i} onClick={this.onClick.bind(null,i)}>
-                    <h4>{item.data.label}</h4>
+                    <h4>{item.title}</h4>
+                    <canvas ref={"canvas"+i} width={screen.width*0.8} height="250" style={this.state.expanded === i?{display:"block"}:{display:"none"}}/>
                 </li>
             );
-        }
+
     },
     renderItemList:function(){
-        return this.state.data.map((item,i)=>{
+        return this.props.map((item,i)=>{
             return this.renderItem(item,i);
         })
-    },
-    tooltipLine:function(label, data) {
-        return label + "  : " + data.y;
     },
      /*
     render:
     */
     render: function() {
-        var itemlist = this.renderItemList();
+        var itemlist = this.props.data.map((item,i)=>{
+            return this.renderItem(item,i);
+        });
         return (
             <div>
                 <section className="ui-panel ui-panel-pure ui-border-t">

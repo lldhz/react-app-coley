@@ -12,7 +12,7 @@ var baseDir = '.';
 
 gulp.task('css', function() {
     try {
-        return gulp.src('css/*.less')      //压缩的文件
+        return gulp.src('css/*.*')      //压缩的文件
             .pipe(concat('all.css'))           //合并
             .pipe(less())                 //执行压缩
             .pipe(minifycss())                 //执行压缩

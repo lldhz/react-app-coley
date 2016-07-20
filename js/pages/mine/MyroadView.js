@@ -1,10 +1,10 @@
 /**
  * Created by Shirley on 16/7/6.
  */
-'use strict'
+'use strict';
 
 var React = require('react');
-var TreatmentInfoBar = require('./TreatmentInfoBar');
+var TreatmentInfoBar = require('./TreatmentInfos');
 var TreatmentTargetBar = require('./TreatmentTargetBar');
 
 var MyroadView = React.createClass({
@@ -16,7 +16,62 @@ var MyroadView = React.createClass({
     */
     getInitialState: function()
     {
-        return null;
+        var _targetData = [];
+        var _color = ["rgba(61,208,221,0.38)", "rgba(61,208,221,0.38)", "rgba(75,192,255,0.38)", "rgba(255,92,55,0.38)"];
+        var _title = ["CEA", "CA153", "CY211", "NSE"];
+        var _icon = ['iconfont icon-jianchabaogao2',
+            'iconfont icon-jianchabaogao2',
+            'iconfont icon-jianchabaogao2',
+            'iconfont icon-jianchabaogao2'];
+
+        for (var i = 0; i < 4; i++) {
+            var _data =
+            {
+                title: _title[i],
+                icon: _icon[i],
+                data: {
+                    type: 'line',
+                    data: {
+                        labels: ["January", "February", "March", "April", "May", "June", "July"],
+                        datasets: [
+                            {
+                                label: _title[i],
+                                fill: true,
+                                lineTension: 0.1,
+                                backgroundColor: _color[i],
+                                borderColor: _color[i],
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'bevel',
+                                pointBorderColor: "rgba(75,192,192,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 1,
+                                pointRadius: 1,
+                                pointHitRadius: 10,
+                                data: [65 - i * 5, 59 - i * 17, 80 - i * 10, 81 - i * 23, 56 + i * 3, 55 - i * 8, 40 + i],
+                            }
+                        ]
+                    },
+                    options: {
+                        title: {
+                            display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        }
+                    },
+                }
+            };
+            _targetData.push(_data);
+        }
+        return ({targetData: _targetData});
     },
      /*
     getDefaultProps:
@@ -30,6 +85,7 @@ var MyroadView = React.createClass({
     */
     componentWillMount: function()
     {
+
         return null;
     },
      /*
@@ -50,106 +106,11 @@ var MyroadView = React.createClass({
     render:
     */
     render: function() {
-        var targetData=[
-            {
-            title:"CEA",
-            data:{
-                type: 'line',
-                data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            fill: true,
-                            lineTension: 0.1,
-                            backgroundColor: "rgba(61,208,221,0.38)",
-                            borderColor: "rgba(61,208,221,0.38)",
-                            borderCapStyle: 'butt',
-                            borderDash: [],
-                            borderDashOffset: 0.0,
-                            borderJoinStyle: 'miter',
-                            pointBorderColor: "rgba(75,192,192,1)",
-                            pointBackgroundColor: "#fff",
-                            pointBorderWidth: 1,
-                            pointHoverRadius: 5,
-                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                            pointHoverBorderColor: "rgba(220,220,220,1)",
-                            pointHoverBorderWidth: 1,
-                            pointRadius: 1,
-                            pointHitRadius: 5,
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                        }
-                    ]
-                },
-                options: Chart.defaults.line
-            }},
-            {
-            title:"CY211",
-            data:{
-                type: 'line',
-                data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            fill: false,
-                            lineTension: 0.1,
-                            backgroundColor: "rgba(75,192,192,0.4)",
-                            borderColor: "rgba(75,192,192,1)",
-                            borderCapStyle: 'butt',
-                            borderDash: [],
-                            borderDashOffset: 0.0,
-                            borderJoinStyle: 'miter',
-                            pointBorderColor: "rgba(75,192,192,1)",
-                            pointBackgroundColor: "#fff",
-                            pointBorderWidth: 1,
-                            pointHoverRadius: 5,
-                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                            pointHoverBorderColor: "rgba(220,220,220,1)",
-                            pointHoverBorderWidth: 2,
-                            pointRadius: 1,
-                            pointHitRadius: 10,
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                        }
-                    ]
-                },
-                options: Chart.defaults.line
-            }},
-            {title:"CA153",
-            data: {
-                type: 'line',
-                data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            fill: false,
-                            lineTension: 0.1,
-                            backgroundColor: "rgba(75,192,192,0.4)",
-                            borderColor: "rgba(75,192,192,1)",
-                            borderCapStyle: 'butt',
-                            borderDash: [],
-                            borderDashOffset: 0.0,
-                            borderJoinStyle: 'miter',
-                            pointBorderColor: "rgba(75,192,192,1)",
-                            pointBackgroundColor: "#fff",
-                            pointBorderWidth: 1,
-                            pointHoverRadius: 5,
-                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                            pointHoverBorderColor: "rgba(220,220,220,1)",
-                            pointHoverBorderWidth: 2,
-                            pointRadius: 1,
-                            pointHitRadius: 10,
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                        }
-                    ]
-                },
-                options: Chart.defaults.line
-            }}
-        ];
+
+        console.log(this.state.targetData);
         return (
              <div>
-                 <TreatmentTargetBar data={targetData}/>
+                 <TreatmentTargetBar data={this.state.targetData}/>
              </div>
         )
     }

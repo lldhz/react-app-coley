@@ -1,0 +1,35 @@
+{
+  "functions": [
+    {
+      "title": "我的消息",
+      "link": "#",
+      "icon": "iconfont icon-message function-i-color"
+    },
+    {
+      "title": "患者信息",
+      "link": "#/patientInfoView",
+      "icon": "iconfont icon-basic function-i-color"
+    },
+    {
+      "title": "病理信息",
+      "link": "#/mechanismInfoView",
+      "icon": "iconfont icon-binglixinxi function-i-color"
+    },
+    {
+      "title": "指标分析",
+      "link": "#/myroadView",
+      "icon": "iconfont icon-fenxi function-i-color"
+    },
+    {
+      "title": "治疗经历",
+      "link": "#/treatmentView",
+      "icon": "iconfont icon-zhiliaojingli function-i-color"
+    },
+    {
+      "title": "我的手机",
+      "link": "#/myPhone",
+      "icon": "iconfont icon-iphone function-i-color",
+      "subTitle": "未绑定"
+    }
+  ]
+}

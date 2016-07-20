@@ -1,7 +1,7 @@
 /**
  * Created by Shirley on 16/7/6.
  */
-'use strict'
+'use strict';
 
 var React = require('react');
 

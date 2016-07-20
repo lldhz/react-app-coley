@@ -38,3 +38,16 @@ String.prototype.toDate = function()
     }
     return dt;
 };
+
+String.prototype.toSecret = function (start, end, fmt) {
+    var length = this.length;
+    if (length < start)
+        return this;
+    var reg_length = end < length ? end - start : length - start;
+    var myphone = this.substr(start, reg_length);
+    //alert(myphone)
+    var reg_text = '';
+    for (var i = 0; i < reg_length; i++)
+        reg_text += fmt;
+    return this.replace(myphone, reg_text);
+};

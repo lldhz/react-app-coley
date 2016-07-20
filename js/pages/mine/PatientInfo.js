@@ -1,12 +1,12 @@
 /**
  * Created by Shirley on 16/6/15.
  */
-'use strict'
+'use strict';
 
-import React,{PropTypes,Component} from 'react';
+var React = require('react');
 
-import CN_CITIES from './city.min.js';
-import IconTextRoundButton from '../../components/icon-text-round';
+//import CN_CITIES from './city.min.js';
+var IconTextRoundButton = require('../../components/icon-text-round');
 var PatientApi = require( "../../api/mine/PatientInfo-api");
 
 var util = require('../../api/util');

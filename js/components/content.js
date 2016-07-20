@@ -1,7 +1,7 @@
 /**
  * Created by Shirley on 16/6/6.
  */
-'use strict'
+'use strict';
 
 //var React = require('react');
 import React,{PropTypes,Component} from 'react'
@@ -18,7 +18,7 @@ export default class Content extends Component
     */
     render() {
         return (
-            <div className="content-box" {...this.props}>
+            <div className="weui_tab_bd content-box" {...this.props}>
                 {this.props.children}
             </div>
         )

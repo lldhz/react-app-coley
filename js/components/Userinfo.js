@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var React = require('react');
 var Userinfo = React.createClass({
@@ -22,17 +22,17 @@ var Userinfo = React.createClass({
      */
     render: function() {
     	return (
-            <div className='mine-userinfo'>
-                <div className='mine-userinfo-row'>
-                    <img className='mine-headimg' src={this.state.headimgurl}/>
-                </div>
-                <div className='mine-userinfo-row mine-font-bigger'>
+            <ul className='mine-basic mine-user-info-back custom-text-align-center'>
+                <li className='mine-userinfo-row'>
+                    <div><img className='mine-user-info-back' src={this.state.headimgurl}/></div>
+                </li>
+                <li className='mine-userinfo-row biggest'>
                     <span>{this.state.nickname}</span>
-                </div>
-                <div className='mine-userinfo-row mine-font-middle'>
-                    <span><i className="iconfont">&#xe614;</i>{" "+this.state.country+" "+this.state.city}</span>
-                </div>
-            </div>
+                </li>
+                <li className='mine-userinfo-row standard'>
+                    <span><i className="iconfont icon-dizhi"/>{" " + this.state.country + " " + this.state.city}</span>
+                </li>
+            </ul>
         )
     }
 });

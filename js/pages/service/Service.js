@@ -1,26 +1,25 @@
 /**
  * Created by Shirley on 16/6/15.
  */
-'use strict'
+'use strict';
+var React = require('react');
+var Content = require('../../components/content');
+var FooterNav = require('../../components/footer-nav');
 
-import React,{PropTypes,Component} from 'react'
-import Content from '../../components/content'
-import FooterNav from '../../components/footer-nav'
 
-export default class Service extends Component {
+var Service = React.createClass({
 
      /*
     render:
-    */    
-    render(
-    ){
+      */
+    render: function () {
         return (
-            <div>
+            <div className='weui_tab'>
                 <Content>
                 </Content>
                 <FooterNav actived="service"/>
             </div>)
     }
-};
+});
 
 module.exports = Service;

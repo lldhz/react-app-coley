@@ -1,7 +1,7 @@
 /**
  * Created by Shirley on 16/7/12.
  */
-'use strict'
+'use strict';
 
 var React = require('react');
 var Chart = require('chart.js');
@@ -42,8 +42,12 @@ var ChartReport = React.createClass({
     render: function() {
         return (
             <li className="ui-border-t">
-                <h4>{this.props.title}</h4>
-                <canvas ref="canvas" width={screen.width*0.8} height="250"/>
+                <div>
+                    <canvas ref="canvas" width={screen.width*0.8} height="250"/>
+                </div>
+                <div className="mine-active-border">
+                    <h2><i className={this.props.icon}/>{this.props.title}</h2>
+                </div>
             </li>)
     }
 });

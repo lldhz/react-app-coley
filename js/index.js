@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 window.$ = require('./http');
 
@@ -11,14 +11,29 @@ function Myroad(callback) {
     util.fetchWeixinUserInfo(
         window.location.search,()=>{
             require.ensure([], function(){
-                callback(require('./pages/myroad/MyRoad'),"奇迹之路");
+                callback(require('./pages/myroad/MyRoad'), "指南");
+            });
+        });
+}
+function GuideLine(callback) {
+    util.fetchWeixinUserInfo(
+        window.location.search, ()=> {
+            require.ensure([], function () {
+                callback(require('./pages/guideline/Guideline'), "指南");
             });
         });
 }
 
 function Mechanism(callback) {
     require.ensure([], function(){
-        callback(require('./pages/mechanism/Mechanism'),"查一查");
+        callback(require('./pages/mechanism/Mechanism'), "大家说");
+    })
+}
+
+
+function TalkRound(callback) {
+    require.ensure([], function () {
+        callback(require('./pages/talk-round/TalkRound'), "大家说");
     })
 }
 
@@ -62,8 +77,15 @@ function TreatmentInfo(callback) {
 function MyroadView(callback) {
     //util.fetchWeixinConfig(()=>{
         require.ensure([], function(){
-            callback(require('./pages/mine/MyroadView'),"诊疗记录");
-        })
+            callback(require('./pages/mine/MyroadView'), "指标分析");
+        });
+    //})
+}
+function MyPhone(callback) {
+    //util.fetchWeixinConfig(()=>{
+    require.ensure([], function () {
+        callback(require('./pages/mine/MyPhone'), "我的手机");
+    });
     //})
 }
 function NotFound(callback) {
@@ -88,7 +110,10 @@ MinRouter.setRoutes({
     "treatmentInfo":TreatmentInfo,
     "patientInfoView":PatientInfoView,
     "myroadView":MyroadView,
-    "":Myroad,
+    "guideLine": GuideLine,
+    "talkRound": TalkRound,
+    "myPhone/:p": MyPhone,
+    "": GuideLine,
 
     "404": NotFound,
     ":a": NotFound,

@@ -19,7 +19,7 @@ var JSApiList =['onMenuShareQQ',
     'scanQRCode',
     'chooseWXPay'];
 exports.fetchWeixinConfig = function(callback) {
-    var _config =new Object();
+    var _config = {};
     http.getJSON("http://service2.haalthy.com/open/weixin/config",
         {url:window.location.protocol + '//' + window.location.host + '/' + window.location.search}
         //{url:window.location.protocol + '//' + window.location.host + '/'}
@@ -46,9 +46,12 @@ exports.fetchWeixinConfig = function(callback) {
 
 exports.fetchWeixinUserInfo = function(params,callback){
         //Alert('错误',params);
-    if(!localStore.getItem('fetched')) {
-        http.getJSON("http://service2.haalthy.com/open/user/basic" + params, data => {
-            if (data.code == 10) {
+    var requestParam = this.getRequest(params);
+    //console.log(requestParam);
+    if (!localStore.getItem('fetched') ||
+        localStore.getItem('code') !== requestParam['code']) {
+        http.getJSON("http://service2.haalthy.com/open/user/basic", requestParam, data => {
+            if (data.code !== 0) {
                 localStore.setItem('openid', data.content.openid);
                 localStore.setItem('country', data.content.country);
                 localStore.setItem('nickname', data.content.nickname);
@@ -56,7 +59,13 @@ exports.fetchWeixinUserInfo = function(params,callback){
                 localStore.setItem('sex', data.content.sex);
                 localStore.setItem('headimgurl', data.content.headimgurl);
                 localStore.setItem('fetched', true);
+                localStore.setItem('code', requestParam['code']);
+                //cookieStore.setItem('fetched','true',7200,'weixin.haalthy.com','/','');
                 callback && callback();
+            }
+            else {
+                console.log(data.content);
+                localStore.clear();
             }
         });
     }
@@ -66,7 +75,7 @@ exports.fetchWeixinUserInfo = function(params,callback){
 
 exports.getRequest = function (data) {
     //var url = window.location.search; //获取url中"?"符后的字串
-    var theRequest = new Object();
+    var theRequest = {};
     if (data.indexOf("?") != -1) {
         var str = data.substr(1);
         var strs = str.split("&");

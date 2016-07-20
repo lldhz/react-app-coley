@@ -1,50 +1,12 @@
 /**
  * Created by Shirley on 16/6/8.
  */
-'use strict'
+'use strict';
 
 var React = require('react');
 var IconTextButtonRectangle = require('./icon-text-rectangle');
 
-const navbuttonData =
-{
-    data:[
-        {
-            data:{
-                name: "myroad",
-                text: "奇迹之旅",
-                link: "#/myroad",
-                actived: "iconfont icon-yhxxh icon-size",
-                noactived:"iconfont icon-yhxx2 icon-size"
-            }
-        },
-        {
-            data:{
-                name: "mechanism",
-                text: "查一查",
-                link: "#/mechanism",
-                actived: "iconfont icon-cych icon-size",
-                noactived:"iconfont icon-cyc icon-size"
-            }
-        },
-        {
-            data:{
-                name: "service",
-                text: "自助服务",
-                link: "#/service",
-                actived: "iconfont icon-dsfkfh icon-size",
-                noactived:"iconfont icon-dsfkf icon-size"
-            }
-        },
-        {
-            data:{
-                name: "mine",
-                text: "我的",
-                link: "#/mine",
-                actived: "iconfont icon-wdh icon-size",
-                noactived:"iconfont icon-wd icon-size"}
-        }]
-};
+var http = require('../http');
 
 var FooterNav = React.createClass({
     /*
@@ -57,22 +19,29 @@ var FooterNav = React.createClass({
     {
         return {actived:this.props.actived};
     },
-    onClick:function(name)
+    componentWillMount: function ()
     {
-        //console.log("name:"+name.target.name);
-        this.setState({actived:name});
+        http.loadJSONFile("/data/navbar.json", data=> {
+            this.setState({menu: data.MENU});
+        });
     },
-    renderNavButton(button,index)
+    onClick: function (name, url)
     {
-        return( <IconTextButtonRectangle actived={this.state.actived} data={button.data} onClick={this.onClick} key={index} />)
+        this.setState({actived: name});
+        window.location.href = url;
+
     },
     /*
      render:
      */
     render: function() {
-        var navbuttons = navbuttonData.data.map(this.renderNavButton);
+        //console.log(this.state.menu);
+        var navbuttons = this.state.menu === undefined ? null : this.state.menu.map((item, index)=> {
+            return (
+                <IconTextButtonRectangle actived={this.state.actived} data={item} onClick={this.onClick} key={index}/>)
+        });
         return (
-            <div className="itrb-footbar">
+            <div className="weui_tabbar">
                     {navbuttons}
             </div>
         )

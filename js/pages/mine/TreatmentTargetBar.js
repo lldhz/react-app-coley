@@ -1,7 +1,7 @@
 /**
  * Created by Shirley on 16/7/6.
  */
-'use strict'
+'use strict';
 
 var React = require('react');
 var ReactDom = require('react-dom');
@@ -57,13 +57,13 @@ var TreatmentTargetBar = React.createClass({
         if(this.state.expanded === i){
             return (
                 <div key={i}>
-                    <ChartReport title={item.title} data={item.data}/>
+                    <ChartReport icon={item.icon} title={item.title} data={item.data}/>
                 </div>)
         }
         else {
             return (
                 <div key={i} onClick={this.onClick.bind(null,i)}>
-                    <FormReport title={item.title}/>
+                    <FormReport icon={item.icon} title={item.title}/>
                 </div>)
         }
 

@@ -14,9 +14,9 @@
 function request(url, config) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
-        var status = (xhr.status === 1223) ? 204 : xhr.status
+        var status = (xhr.status === 1223) ? 204 : xhr.status;
         if (status < 100 || status > 599) {
-            config.error(new TypeError('Network request failed'))
+            config.error(new TypeError('Network request failed'));
             return
         }
         var body = 'response' in xhr ? xhr.response : xhr.responseText;
@@ -24,14 +24,14 @@ function request(url, config) {
             body = JSON.parse(body);
         }
         config.success({body: body, status: status, statusText: xhr.statusText})
-    }
+    };
 
     if (config.method == 'GET') {
         var args = [];
         for (let q in config.data) {
             args.push(`${q}=${config.data[q]}`);
         }
-        let q = ''
+        let q = '';
         if (args.length > 0) {
             q = '?'
         }
@@ -241,6 +241,25 @@ exports.ajaxPost = function(url, data, callback) {
 //function appendToken(url) {
 //    return url;
 //}
+exports.loadJSONFile = function (url, data, callback) {
+    if (typeof data === 'function') {
+        callback = data;
+    }
+
+    request(url, {
+        method: 'GET',
+        dataType: 'json',
+        data: data,
+        success(res) {
+            //console.log(res);
+            var data = res.body;
+            //console.log(data);
+            httpInterceptor(data);
+            callback && callback(data);
+        }
+    })
+
+};
 
 /**
  * http 拦截器（统一处理错误信息）

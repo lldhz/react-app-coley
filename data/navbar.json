@@ -1,0 +1,32 @@
+{
+  "MENU": [
+    {
+      "name": "guideline",
+      "text": "指南",
+      "link": "#/guideLine",
+      "actived": "iconfont icon-homeh",
+      "noactived": "iconfont icon-home"
+    },
+    {
+      "name": "talkround",
+      "text": "大家说",
+      "link": "#/talkRound",
+      "actived": "iconfont icon-quanzih",
+      "noactived": "iconfont icon-quanzi"
+    },
+    {
+      "name": "service",
+      "text": "自助服务",
+      "link": "#/service",
+      "actived": "iconfont icon-dsfkfh",
+      "noactived": "iconfont icon-dsfkf"
+    },
+    {
+      "name": "mine",
+      "text": "我的",
+      "link": "#/mine",
+      "actived": "iconfont icon-wdh",
+      "noactived": "iconfont icon-wd"
+    }
+  ]
+}

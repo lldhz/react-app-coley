@@ -25,7 +25,7 @@ var IconTextRectangleButton = React.createClass({
                  className={this.props.actived === this.props.data.name ?"weui_tabbar_item itrb-herder itrb-color" : "weui_tabbar_item itrb-herder"}
                  onClick={this.handleClick}>
                 <div className="weui_tabbar_icon">
-                    <i className={this.props.actived == this.props.data.name ? this.props.data.actived:this.props.data.noactived}/>
+                    <i className={this.props.actived == this.props.data.name ? this.props.data.actived:this.props.data.noactived} style={{fontSize:'20px'}}/>
                 </div>
                 <span className="weui_tabbar_label">{this.props.data.text}</span>
             </div>)

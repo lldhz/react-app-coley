@@ -19,7 +19,7 @@ function GuideLine(callback) {
     util.fetchWeixinUserInfo(
         window.location.search, ()=> {
             require.ensure([], function () {
-                callback(require('./pages/guideline/Guideline'), "指南");
+                callback(require('./pages/guideline/GuideLine'), "指南");
             });
         });
 }

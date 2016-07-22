@@ -6,6 +6,7 @@
 var React = require('react');
 var Chart = require('chart.js');
 var ReactDom = require('react-dom');
+var dataStore = require('../store/DataStore');
 
 var ChartReport = React.createClass({
      /*
@@ -16,7 +17,10 @@ var ChartReport = React.createClass({
     */
     getInitialState: function()
     {
-        return {Chart:{}};
+        return {Chart:{},ctx:{}};
+    },
+    componentWillMount:function(){
+        dataStore.addListener(this.onUpdateChart);
     },
      /*
     componentDidMount:
@@ -25,30 +29,31 @@ var ChartReport = React.createClass({
     {
         var el=ReactDom.findDOMNode(this.refs.canvas);
 
-        var ctx= el.getContext('2d');
+        this.state.ctx= el.getContext('2d');
 
-        this.setState({Chart:new Chart(ctx, this.props.data)});
+        this.setState({Chart:new Chart(this.state.ctx, dataStore.getStore())});
     },
     /*
      componentWillUnmount:
      */
     componentDidUnMount: function()
     {
+        dataStore.removeListener(this.onUpdateChart);
         this.state.Chart.destroy();
     },
-     /*
-    render:
-    */
+
+    onUpdateChart:function(){
+        this.state.Chart.destroy();
+
+        this.state.Chart = new Chart(this.state.ctx, dataStore.getStore());
+
+    },
+
     render: function() {
         return (
-            <li className="ui-border-t">
                 <div>
                     <canvas ref="canvas" width={screen.width*0.8} height="250"/>
-                </div>
-                <div className="mine-active-border">
-                    <h2><i className={this.props.icon}/>{this.props.title}</h2>
-                </div>
-            </li>)
+                </div>)
     }
 });
 

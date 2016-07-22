@@ -17,18 +17,16 @@ var MyroadView = React.createClass({
     getInitialState: function()
     {
         var _targetData = [];
-        var _color = ["rgba(61,208,221,0.38)", "rgba(61,208,221,0.38)", "rgba(75,192,255,0.38)", "rgba(255,92,55,0.38)"];
-        var _title = ["CEA", "CA153", "CY211", "NSE"];
-        var _icon = ['iconfont icon-jianchabaogao2',
-            'iconfont icon-jianchabaogao2',
-            'iconfont icon-jianchabaogao2',
-            'iconfont icon-jianchabaogao2'];
+        var _color = ["rgba(61,208,221,0.38)","rgba(75,192,255,0.38)", "rgba(255,92,55,0.38)","rgba(75,56,95,0.38)"];
+        var _title = ["CEA", "CA15-3", "NSE","Cyfra211"];
+        var _icon = ['iconfont icon-fenxi',
+            'iconfont icon-fenxi',
+            'iconfont icon-fenxi',
+            'iconfont icon-fenxi'];
 
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 5; i++) {
             var _data =
             {
-                title: _title[i],
-                icon: _icon[i],
                 data: {
                     type: 'line',
                     data: {
@@ -60,18 +58,13 @@ var MyroadView = React.createClass({
                     options: {
                         title: {
                             display: false
-                        },
-                        scales: {
-                            yAxes: [{
-                                stacked: true
-                            }]
                         }
                     },
                 }
             };
             _targetData.push(_data);
         }
-        return ({targetData: _targetData});
+        return ({targetData: _targetData,title:_title,icon:_icon});
     },
      /*
     getDefaultProps:
@@ -106,11 +99,9 @@ var MyroadView = React.createClass({
     render:
     */
     render: function() {
-
-        console.log(this.state.targetData);
         return (
              <div>
-                 <TreatmentTargetBar data={this.state.targetData}/>
+                 <TreatmentTargetBar data={this.state.targetData} title={this.state.title} icon={this.state.icon}/>
              </div>
         )
     }

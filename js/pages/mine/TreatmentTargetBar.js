@@ -7,6 +7,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var ChartReport = require('../../components/ChartReport');
 var FormReport = require('../../components/FormReport');
+var dataStore = require('../../store/DataStore');
 
 var TreatmentTargetBar = React.createClass({
      /*
@@ -17,7 +18,7 @@ var TreatmentTargetBar = React.createClass({
     */
     getInitialState: function()
     {
-        return ({expanded:0})
+        return ({expanded:0,data:this.props.data[0]})
     },
      /*
     getDefaultProps:
@@ -51,40 +52,41 @@ var TreatmentTargetBar = React.createClass({
 
     onClick:function(i)
     {
-        this.setState({expanded:i});
-    },
-    renderItem:function(item,i){
-        if(this.state.expanded === i){
-            return (
-                <div key={i}>
-                    <ChartReport icon={item.icon} title={item.title} data={item.data}/>
-                </div>)
-        }
-        else {
-            return (
-                <div key={i} onClick={this.onClick.bind(null,i)}>
-                    <FormReport icon={item.icon} title={item.title}/>
-                </div>)
-        }
-
+        this.setState({expanded:i,data:this.props.data[i]});
     },
 
+    renderNavItem:function(item,i,icon,width){
+        if(this.state.expanded === i)
+        {
+            return (<div className='weui_navbar_item mine-tab-item-on'
+                         style={{width:width,float:'left',display:'inline-block'}} key={i}>
+                <span><i className={icon}/>{item}</span>
+            </div>);
+        }else{
+                    return (<div className='weui_navbar_item mine-tab-item'
+                                 style={{width:width,float:'left',display:'inline-block'}}
+                                 onClick={this.onClick.bind(null,i)}  key={i}>
+                        <span><i className={icon}/>{item}</span>
+                    </div>);
+                }
+    },
      /*
     render:
     */
     render: function() {
-        var itemList = this.props.data.map((item,i)=>{
-            return this.renderItem(item,i);
+        var navWidth = (100/this.props.title.length).toFixed(0);
+        var navList = this.props.title.map((item,i)=>{
+            return this.renderNavItem(item,i,this.props.icon[i],navWidth+"%");
         });
-
-        return (
-            <div>
-                <section className="ui-panel ui-panel-pure ui-border-t">
-                    <ul class="ui-list ui-list-pure ui-border-tb">
-                        {itemList}
-                    </ul>
-                </section>
-            </div>)
+        dataStore.setStore(this.state.data.data);
+        return (<div className='weui_tab'>
+            <div classNmae='weui_navbar' style={{width:'100%'}}>
+                {navList}
+            </div>
+            <div className='weui_tab_bd'  style={{width:'100%'}}>
+                <ChartReport />
+            </div>
+        </div>)
     }
 });
 

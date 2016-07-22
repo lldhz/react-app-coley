@@ -48,6 +48,10 @@ var TalkRound = React.createClass({
         return (
             <div className='weui_tab'>
                 <Content>
+                    <div className='weui_tab'>
+                        <div classNmae='weui_navbar' style={{width:'100%'}}></div>
+
+                    </div>
                 </Content>
                 <FooterNav actived="talkround"/>
             </div>)

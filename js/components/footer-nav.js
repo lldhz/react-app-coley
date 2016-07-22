@@ -22,13 +22,16 @@ var FooterNav = React.createClass({
     componentWillMount: function ()
     {
         http.loadJSONFile("/data/navbar.json", data=> {
-            this.setState({menu: data.MENU});
+            this.setState({menu:data.MENU});
         });
     },
+
     onClick: function (name, url)
     {
-        this.setState({actived: name});
-        window.location.href = url;
+        if(name !== this.state.actived){
+            //this.setState({actived: name});
+            window.location.href = url;
+        }
 
     },
     /*

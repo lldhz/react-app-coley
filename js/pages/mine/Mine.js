@@ -49,7 +49,7 @@ var Mine = React.createClass({
                 subLink = this.state.phone === null || this.state.phone === undefined ? func.link + '/1' : func.link + '/' + this.state.phone;
             }
             return (
-                <li key={i}>
+                <div key={i}>
                     <a className="weui_cell" href={subLink === '' ? func.link :subLink}>
                         <div className="weui_cell_bd weui_cell_primary bigger">
                             <i className={func.icon}></i><span
@@ -59,13 +59,13 @@ var Mine = React.createClass({
                             {subTitle}
                         </div>
                     </a>
-                </li>
+                </div>
             );
         });
         return (
-            <ul className="weui_cells weui_cells_access">
+            <div className="weui_cells weui_cells_access">
                 {List}
-            </ul>
+            </div>
         );
     },
      /*

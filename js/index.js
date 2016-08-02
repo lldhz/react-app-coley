@@ -70,7 +70,7 @@ function MechanismInfoView(callback) {
 function TreatmentInfo(callback) {
     util.fetchWeixinConfig(()=>{
         require.ensure([], function(){
-            callback(require('./pages/myroad/TreatmentInfo'),"诊疗记录");
+            callback(require('./pages/myroad/TreatmentInfo'),"治疗经历");
         })
     })
 }
